@@ -20,6 +20,6 @@ output = data.map(lambda x: x.split('\t') ) \
         .filter(lambda x: keyword in x[1] and x[1][keyword]) \
         .map(lambda x: (x[0], len(x[1][keyword].split(',')))).collect()
 
-with open('/home/hadoop/chen.cheng/Chronos/hobby_count', 'w') as f:
+with open('/home/hadoop/chen.cheng/Chronos/hobby_count_moive', 'w') as f:
     for item in output:
         f.write("%s\t%d\n" %( item[0], item[1]  ) )
