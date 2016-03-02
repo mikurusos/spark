@@ -13,7 +13,7 @@ sc = SparkContext(conf=conf)
 
 data = sc.textFile("hdfs://antispam/user/wang.fangkui/hobby.res")
 
-output = map(lambda x: x.split('\t') ) \
+output = data.map(lambda x: x.split('\t') ) \
         .map(lambda x: [x[0], json.loads(x[1])]).filter(lambda x: x[1])\
         .filter(lambda x: 'music' in x[1] and x[1]['music']) \
         .map(lambda x: (x[0], len(x[1]['music'].split(',')))).collect()
