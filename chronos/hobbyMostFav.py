@@ -15,7 +15,7 @@ def flat(l):
     return data
 
 
-keyword='book'
+keyword='music'
 
 conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-spark-001.yz.momo.com:8081,anti-spam-spark-002.yz.momo.com:8081")
 sc = SparkContext(conf=conf)
@@ -29,6 +29,6 @@ output = data.map(lambda x: x.split('\t') ) \
         .flatMap(lambda x: flat(x[1])).reduceByKey(add)  \
         .collect()
 
-with open('/home/hadoop/chen.cheng/Chronos/most_fav_book', 'w') as f:
+with open('/home/hadoop/chen.cheng/Chronos/most_fav_'+keyword, 'w') as f:
     for item in output:
         f.write("%d\t%d\n" %( item[0], item[1]  ) )
