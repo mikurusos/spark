@@ -9,7 +9,7 @@ sys.setdefaultencoding('utf-8')
 
 try:
     print "loading..."
-    with open("gender.pkl", "rb") as f:
+    with open("/home/hadoop/chen.cheng/moa/gender.pkl", "rb") as f:
         gender = pickle.load(f)
     print "finished!"
 except:
