@@ -8,7 +8,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-keyword='movie'
+keyword='book'
 
 conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-spark-001.yz.momo.com:8081,anti-spam-spark-002.yz.momo.com:8081")
 sc = SparkContext(conf=conf)
@@ -20,6 +20,6 @@ output = data.map(lambda x: x.split('\t') ) \
         .filter(lambda x: keyword in x[1] and x[1][keyword]) \
         .map(lambda x: (x[0], len(x[1][keyword].split(',')))).collect()
 
-with open('/home/hadoop/chen.cheng/Chronos/hobby_count_moive', 'w') as f:
+with open('/home/hadoop/chen.cheng/Chronos/hobby_count_book', 'w') as f:
     for item in output:
         f.write("%s\t%d\n" %( item[0], item[1]  ) )

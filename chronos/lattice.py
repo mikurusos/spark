@@ -22,7 +22,7 @@ def var(l):
 data = sc.textFile("hdfs://antispam/user/hadoop/output/wang.yuqi/crux/wheretheymeet/2016030116-24/")
 
 output= data.map(lambda x: x.split('\t')).map(lambda x: (json.loads(x[0]), json.loads(x[1]))) \
-        .map(lambda x: (x[0], [item[0] for item in x[1]])).filter(lambda x: var(x[1])>10).count()
+        .map(lambda x: (x[0], [item[0] for item in x[1]])).filter(lambda x: var(x[1])>3).count()
 
 #output = data.collect()
 
