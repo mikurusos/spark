@@ -26,9 +26,9 @@ tmp = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[
 
 tmp.cache()
 
-male = tmp.filter(lambda x: gender[int(x[1][1])]=='M').count()
+male = tmp.filter(lambda x: x[1][1].isdigit()).filter(lambda x: gender[int(x[1][1])]=='M').count()
 
-female = tmp.filter(lambda x: gender[int(x[1][1])]=='F').count()
+female = tmp.filter(lambda x: x[1][1].isdigit()).filter(lambda x: gender[int(x[1][1])]=='F').count()
 
 with open('/home/hadoop/chen.cheng/Chronos/0302_genderNum', 'w') as f:
     f.write("%d\t%d" %( female, male  ) )
