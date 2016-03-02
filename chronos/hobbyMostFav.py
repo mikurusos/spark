@@ -17,10 +17,10 @@ data = sc.textFile("hdfs://antispam/user/wang.fangkui/hobby.res")
 output = data.map(lambda x: x.split('\t') ) \
         .map(lambda x: [x[0], json.loads(x[1])]).filter(lambda x: x[1])\
         .filter(lambda x: keyword in x[1] and x[1][keyword]) \
-        .map(lambda x: (x[0], len(x[1][keyword].split(',')))) \
+        .map(lambda x: (x[0], x[1][keyword].split(','))) \
         .flatMap(lambda x: [(int(i), 1) for i in x[1]]).reduceByKey(add)  \
         .collect()
 
 with open('/home/hadoop/chen.cheng/Chronos/most_fav_book', 'w') as f:
     for item in output:
-        f.write("%s\t%d\n" %( item[0], item[1]  ) )
+        f.write("%d\t%d\n" %( item[0], item[1]  ) )
