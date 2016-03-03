@@ -12,9 +12,9 @@ sc = SparkContext(conf=conf)
 
 data = sc.textFile("hdfs://antispam/user/hadoop/output/wang.yuqi/Venus/like_person/2016030218-24/")
 
-out = data.map(lambda x : x.split('\t')).map(lambda x: [json.loads(json.loads(x[0])), json.loads(x[1])[0]])\
-        .collect()
+out = data.map(lambda x : x.split('\t')).map(lambda x: [json.loads(json.loads(x[0])), json.loads(x[1])[0]])
 
-with open('/home/hadoop/chen.cheng/Chronos/0302_data', 'w') as f:
-    for item in out:
-        f.write("%s\t%s\t%d\n" %(item[0][0], item[0][1], item[1]) )
+out.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/2016030218-24/")
+
+
+sc.stop()
