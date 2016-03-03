@@ -22,8 +22,7 @@ b = sc.broadcast(gender)
 
 data = sc.textFile("hdfs://antispam/user/hadoop/output/wang.yuqi/Venus/like_person/2016030218-24/")
 
-tmp = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[0])), int(x[1][0])))
-
+tmp = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[0])), json.loads(x[1])[0]))
 tmp.cache()
 
 male = tmp.filter(lambda x: x[0][0].isdigit()).filter(lambda x: gender[int(x[0][0])]=='M').count()
