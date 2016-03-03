@@ -16,5 +16,6 @@ out = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[
         .filter(lambda x: x[1]).map(lambda x: (int(x[0][1]), 1))\
         .reduceByKey(add).collect()
 
-with open('/home/hadoop/chen.cheng/Chronos/0302_successGenderNum', 'w') as f:
-    f.write("%d\t%d" %(out[0], out[1]  ) )
+with open('/home/hadoop/chen.cheng/Chronos/0302_likeRank', 'w') as f:
+    for item in out:
+        f.write("%d\t%d\n" %(item[0], item[1]  ) )
