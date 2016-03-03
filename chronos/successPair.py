@@ -16,9 +16,9 @@ tmp = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[
         .filter(lambda x: x[1]).map(lambda x: sorted([int(x[0][0]), int(x[0][1])]))
 tmp.cache()
 
-dateNum = tmp.map(lambda x:(tuple(x),1)).reduceByKey(lambda x,y:x).count()
+#dateNum = tmp.map(lambda x:(tuple(x),1)).reduceByKey(lambda x,y:x).count()
 
-pNum = tmp.flatMap(lambda x :x).map(lambda x:(tuple(x),1)).reduceByKey(lambda x,y:x).count()
+pNum = tmp.flatMap(lambda x :x).map(lambda x:(x,1)).reduceByKey(lambda x,y:x).count()
 
 with open('/home/hadoop/chen.cheng/Chronos/0302_successNum', 'w') as f:
-    f.write("%d\t%d" %( dateNum, pNum  ) )
+    f.write("%d" %(pNum  ) )
