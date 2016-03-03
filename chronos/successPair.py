@@ -31,9 +31,9 @@ tmp.cache()
 
 success = tmp.flatMap(lambda x :list(x[0])).map(lambda x:(x,1)).reduceByKey(lambda x,y:x)
 
-male = success.filter(lambda x: int(x[0][0]) in gender and gender[int(x[0][0])]=='M').count()
+male = success.filter(lambda x: x in gender and gender[x]=='M').count()
 
-female = success.filter(lambda x: int(x[0][0]) in gender and gender[int(x[0][0])]=='F').count()
+female = success.filter(lambda x: x in gender and gender[x]=='F').count()
 
 with open('/home/hadoop/chen.cheng/Chronos/0302_successGenderNum', 'w') as f:
     f.write("%d\t%d" %(female, male  ) )
