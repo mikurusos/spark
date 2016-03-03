@@ -22,7 +22,7 @@ b = sc.broadcast(gender)
 
 data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/2016030218-24/")
 
-out = data.map(lambda x : json.loads(x)).filter(lambda x: gender[x[0][0]] == "M")
+out = data.map(lambda x : json.loads(x)).filter(lambda x: x[0][0] in gender and  gender[x[0][0]] == "M")
 
 '''
 with open('/home/hadoop/chen.cheng/Chronos/momoid', 'w') as f:
