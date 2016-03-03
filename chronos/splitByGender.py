@@ -30,6 +30,6 @@ with open('/home/hadoop/chen.cheng/Chronos/momoid', 'w') as f:
         f.write("%s\n" %(item ) )
 '''
 
-out.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/2016030218-24/male")
+out.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/2016030218-24_male")
 
 sc.stop()
