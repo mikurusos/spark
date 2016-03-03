@@ -13,7 +13,7 @@ sc = SparkContext(conf=conf)
 data = sc.textFile("hdfs://antispam/user/hadoop/output/wang.yuqi/Venus/like_person/2016030218-24/")
 
 output = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[0])), json.loads(x[1])[0]))\
-        .filter(lambda x: x[1]).map(lambda x: sorted([int(x[0][0]), int(x[0][1])]))\
+        .filter(lambda x: x[1]).map(lambda x: tuple(sorted([int(x[0][0]), int(x[0][1])])))\
         .map(lambda x:[x,1]).reduceByKey(lambda x,y:x).count()
 
 
