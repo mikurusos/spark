@@ -12,7 +12,7 @@ sc = SparkContext(conf=conf)
 
 try:
     print "loading..."
-    with open("/home/hadoop/chen.cheng/moa/gender.pkl", "rb") as f:
+    with open("/home/hadoop/chen.cheng/moa/gender2.pkl", "rb") as f:
         gender = pickle.load(f)
     print "finished!"
 except:
@@ -22,18 +22,14 @@ b = sc.broadcast(gender)
 
 data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/2016030218-24/")
 
-out = data.map(lambda x : json.loads(x)).flatMap(lambda x: x[0]) \
-        .map(lambda x: (x,1)).reduceByKey(lambda x,y:x).map(lambda x:x[0]).collect()
+out = data.map(lambda x : json.loads(x)).filter(lambda x: gender[x[0][0]] == "M")
 
+'''
 with open('/home/hadoop/chen.cheng/Chronos/momoid', 'w') as f:
     for item in out:
         f.write("%s\n" %(item ) )
-
-
-
 '''
+
 out.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/2016030218-24/male")
-'''
-
 
 sc.stop()
