@@ -22,8 +22,8 @@ b = sc.broadcast(gender)
 
 data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/2016030218-24/")
 
-out = data.map(lambda x : json.loads(x)).map(lambda x: x[0]) \
-        .map(lambda x: [x,1]).reduceByKey(lambda x,y:x).map(lambda x:x[0]).collect()
+out = data.map(lambda x : json.loads(x)).flatMap(lambda x: x[0]) \
+        .map(lambda x: (x,1)).reduceByKey(lambda x,y:x).map(lambda x:x[0]).collect()
 
 with open('/home/hadoop/chen.cheng/Chronos/momoid', 'w') as f:
     for item in out:
