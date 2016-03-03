@@ -13,9 +13,9 @@ sc = SparkContext(conf=conf)
 data = sc.textFile("hdfs://antispam/user/hadoop/output/wang.yuqi/Venus/like_person/2016030218-24/")
 
 out = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[0])), json.loads(x[1])[0]))\
-        .filter(lambda x: x[1]).map(lambda x: (int(x[0][1]), 1))\
+        .filter(lambda x: not x[1]).map(lambda x: (int(x[0][1]), 1))\
         .reduceByKey(add).collect()
 
-with open('/home/hadoop/chen.cheng/Chronos/0302_likeRank', 'w') as f:
+with open('/home/hadoop/chen.cheng/Chronos/0302_unlikeRank', 'w') as f:
     for item in out:
         f.write("%d\t%d\n" %(item[0], item[1]  ) )
