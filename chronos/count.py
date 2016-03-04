@@ -23,6 +23,7 @@ b = sc.broadcast(gender)
 data = sc.textFile("hdfs://antispam/user/hadoop/output/wang.yuqi/Venus/like_person/2016030218-24/")
 
 output = data.map(lambda x : x.split('\t')).flatMap(lambda x: json.loads(json.loads(x[0])))\
+        .map(lambda x: [x,1]).reduceByKey(lambda x,y:x).map(lambda x:x[0]) \
         .collect()
 
 '''
