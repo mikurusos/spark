@@ -23,7 +23,7 @@ except:
 b = sc.broadcast(gender)
 
 tmp = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[0])), json.loads(x[1])[0]))\
-        .filter(lambda x: x[0][0] in gender and gender[x[0][0]]=='F')\
+        .filter(lambda x: int(x[0][0]) in gender and gender[int(x[0][0])]=='F')\
         .filter(lambda x:x[1]).map(lambda x:(x[0][0], 1))\
         .reduceByKey(add).map(lambda x:(x[1], 1))\
         .reduceByKey(add).collect()
