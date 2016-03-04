@@ -30,7 +30,6 @@ tmp = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[
 
 success = tmp.filter(lambda x :x[1]==2).count()
 
-
 #male = success.filter(lambda x: x[0] in gender and gender[x[0]]=='M').map(lambda x:(x,1)).reduceByKey(lambda x,y:x).count()
 
 #female = success.filter(lambda x: x[0] in gender and gender[x[0]]=='F').map(lambda x:(x,1)).reduceByKey(lambda x,y:x).count()

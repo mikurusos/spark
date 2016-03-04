@@ -18,8 +18,9 @@ data = sc.textFile("hdfs://antispam/user/wang.fangkui/hobby.res")
 output = data.map(lambda x: x.split('\t') ) \
         .map(lambda x: [x[0], json.loads(x[1])]).filter(lambda x: x[1])\
         .filter(lambda x: keyword in x[1] and x[1][keyword]) \
-        .map(lambda x: (x[0], len(x[1][keyword].split(',')))).collect()
+        .flatMap(lambda x: [ (x[0], item) for item in  x[1][keyword].split(',')])\
+        .filter(lambda x:len(x[1])>0).collect()
 
-with open('/home/hadoop/chen.cheng/Chronos/hobby_count_book', 'w') as f:
-    for item in output:
-        f.write("%s\t%d\n" %( item[0], item[1]  ) )
+output.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/bobby/%s" % (keyword))
+
+sc.stop()
