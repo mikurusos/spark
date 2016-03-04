@@ -22,12 +22,14 @@ b = sc.broadcast(gender)
 
 data = sc.textFile("hdfs://antispam/user/hadoop/output/wang.yuqi/Venus/like_person/2016030218-24/")
 
-tmp = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[0])), json.loads(x[1])[0]))
-tmp.cache()
+output = data.map(lambda x : x.split('\t')).flatMap(lambda x: json.loads(json.loads(x[0])))\
+        .collect()
 
+'''
 male = tmp.filter(lambda x: x[0][0].isdigit()).filter(lambda x: int(x[0][0]) in gender and gender[int(x[0][0])]=='M').count()
-
 female = tmp.filter(lambda x: x[0][0].isdigit()).filter(lambda x: int(x[0][0]) in gender and gender[int(x[0][0])]=='F').count()
+'''
 
-with open('/home/hadoop/chen.cheng/Chronos/0302_genderNum', 'w') as f:
-    f.write("%d\t%d" %( female, male  ) )
+with open('/home/hadoop/chen.cheng/Chronos/0303_momoid', 'w') as f:
+    for item in output:
+        f.write("%s\n" %( item  ) )
