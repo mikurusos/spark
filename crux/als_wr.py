@@ -18,7 +18,7 @@ tfidf=loadPickle('/home/hadoop/chen.cheng/moa/book_tfidf.pkl')
 ratings = user_artist_data.map(lambda x: json.loads(x))\
         .flatMap(lambda x: [[x[0], item] for item in x[1]]) \
         .filter(lambda x: x[0] and x[1] )\
-        .map(lambda x: Rating(int(x[0]), int(x[1]), tfidf[x[1]]))
+        .map(lambda x: Rating(int(x[0]), int(x[1]), 1))
 ratings.cache()
 
 rank = 10
