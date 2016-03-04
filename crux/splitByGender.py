@@ -1,25 +1,15 @@
 # -*- coding: utf-8 -*-
 import sys
 import json
-import cPickle as pickle
 from operator import add
-from pyspark import SQLContext, SparkContext, SparkConf
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-spark-001.yz.momo.com:8081,anti-spam-spark-002.yz.momo.com:8081")
-sc = SparkContext(conf=conf)
+from config import sc
+from util import loadPickle
 
-try:
-    print "loading..."
-    with open("/home/hadoop/chen.cheng/moa/gender2.pkl", "rb") as f:
-        gender = pickle.load(f)
-    print "finished!"
-except:
-    gender = {}
-
+gender = loadPickle("/home/hadoop/chen.cheng/moa/gender3.pkl")
 b = sc.broadcast(gender)
-
 data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/2016030218-24/")
 
 out = data.map(lambda x : json.loads(x)).filter(lambda x: int(x[0][0]) in gender and  gender[int(x[0][0])] == "M")\
