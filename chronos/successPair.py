@@ -10,11 +10,11 @@ sys.setdefaultencoding('utf-8')
 conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-spark-001.yz.momo.com:8081,anti-spam-spark-002.yz.momo.com:8081")
 sc = SparkContext(conf=conf)
 
-data = sc.textFile("hdfs://antispam/user/hadoop/output/wang.yuqi/Venus/like_person/2016030218-24/")
+data = sc.textFile("hdfs://antispam/user/hadoop/output/wang.yuqi/Venus/like_person/2016030318-24/")
 
 try:
     print "loading..."
-    with open("/home/hadoop/chen.cheng/moa/gender.pkl", "rb") as f:
+    with open("/home/hadoop/chen.cheng/moa/gender3.pkl", "rb") as f:
         gender = pickle.load(f)
     print "finished!"
 except:
