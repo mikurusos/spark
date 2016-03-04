@@ -24,16 +24,16 @@ b = sc.broadcast(gender)
 
 tmp = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[0])), json.loads(x[1])[0]))\
         .filter(lambda x: x[1]).map(lambda x: sorted([int(x[0][0]), int(x[0][1])]))\
-        .map(lambda x:(tuple(x),1)).reduceByKey(lambda x,y:x)
+        .map(lambda x:(tuple(x),1)).reduceByKey(add)
 
 #dateNum = tmp.map(lambda x:(tuple(x),1)).reduceByKey(lambda x,y:x).count()
 
-success = tmp.flatMap(lambda x :list(x[0])).map(lambda x:(x,1)).reduceByKey(lambda x,y:x)
-success.cache()
+success = tmp.filter(lambda x :x[1]==2).count()
 
-male = success.filter(lambda x: x[0] in gender and gender[x[0]]=='M').map(lambda x:(x,1)).reduceByKey(lambda x,y:x).count()
 
-female = success.filter(lambda x: x[0] in gender and gender[x[0]]=='F').map(lambda x:(x,1)).reduceByKey(lambda x,y:x).count()
+#male = success.filter(lambda x: x[0] in gender and gender[x[0]]=='M').map(lambda x:(x,1)).reduceByKey(lambda x,y:x).count()
 
-with open('/home/hadoop/chen.cheng/Chronos/0303_successGenderNum', 'w') as f:
-    f.write("%d\t%d" %(female, male  ) )
+#female = success.filter(lambda x: x[0] in gender and gender[x[0]]=='F').map(lambda x:(x,1)).reduceByKey(lambda x,y:x).count()
+
+with open('/home/hadoop/chen.cheng/Chronos/0303_successNum', 'w') as f:
+    f.write("%d" %(success  ) )
