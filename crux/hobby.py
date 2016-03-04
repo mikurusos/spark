@@ -18,7 +18,7 @@ data = sc.textFile("hdfs://antispam/user/wang.fangkui/hobby.res")
 output = data.map(lambda x: x.split('\t') ) \
         .map(lambda x: [x[0], json.loads(x[1])]).filter(lambda x: x[1])\
         .filter(lambda x: keyword in x[1] and x[1][keyword]) \
-        .flatMap(lambda x: (x[0], x[1][keyword].split(',')))\
+        .map(lambda x: (x[0], x[1][keyword].split(',')))\
         .filter(lambda x:len(x[1])>0).map(lambda x: json.dumps(x))
 
 output.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/bobby/%s" % (keyword))
