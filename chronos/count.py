@@ -24,15 +24,19 @@ sc = SparkContext(conf=conf)
 
 data = sc.textFile("hdfs://antispam/user/hadoop/output/wang.yuqi/Venus/like_person/2016030318-24/")
 
-output = data.map(lambda x : x.split('\t')).flatMap(lambda x: json.loads(json.loads(x[0])))\
-        .map(lambda x: [x,1]).reduceByKey(lambda x,y:x).map(lambda x:x[0]) \
-        .collect()
+tmp = data.map(lambda x : x.split('\t')).map(lambda x: json.loads(json.loads(x[0])))
+tmp.cache()
+
+input = tmp.map(lambda x: [x[0],1]).reduceByKey(lambda x,y:x) \
+        .count()
+
+output =  tmp.map(lambda x: [x[1],1]).reduceByKey(lambda x,y:x) \
+        .count()
 
 '''
 male = tmp.filter(lambda x: x[0][0].isdigit()).filter(lambda x: int(x[0][0]) in gender and gender[int(x[0][0])]=='M').count()
 female = tmp.filter(lambda x: x[0][0].isdigit()).filter(lambda x: int(x[0][0]) in gender and gender[int(x[0][0])]=='F').count()
 '''
 
-with open('/home/hadoop/chen.cheng/Chronos/0303_momoid', 'w') as f:
-    for item in output:
-        f.write("%s\n" %( item  ) )
+with open('/home/hadoop/chen.cheng/Chronos/0303_inputoutput', 'w') as f:
+    f.write("%d\t%d\n" %( input, output  ) )
