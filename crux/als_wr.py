@@ -21,8 +21,8 @@ ratings = user_artist_data.map(lambda x: json.loads(x))\
         .map(lambda x: Rating(int(x[0]), int(x[1]), 1))
 ratings.cache()
 
-rank = 10
-numIterations = 10
+rank = 20
+numIterations = 30
 model = ALS.trainImplicit(ratings, rank, numIterations, alpha=0.01)
 
 model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_book")
