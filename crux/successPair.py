@@ -25,6 +25,7 @@ b = sc.broadcast(gender)
 tmp = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[0])), json.loads(x[1])[0]))\
         .filter(lambda x: x[0][0] in gender and gender[x[0][0]]=='F')\
         .filter(lambda x:x[1]).map(lambda x:(x[0][0], 1))\
+        .reduceByKey(add).map(lambda x:(x[1], 1))\
         .reduceByKey(add).collect()
 
 #dateNum = tmp.map(lambda x:(tuple(x),1)).reduceByKey(lambda x,y:x).count()
@@ -37,4 +38,4 @@ tmp = data.map(lambda x : x.split('\t')).map(lambda x: (json.loads(json.loads(x[
 
 with open('/home/hadoop/chen.cheng/Chronos/0303_girlLike', 'w') as f:
     for item in tmp:
-        f.write("%s\t%d\n" %(item[0], item[1]) )
+        f.write("%d\t%d\n" %(item[0], item[1]) )
