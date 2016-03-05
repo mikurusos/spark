@@ -12,7 +12,7 @@ sc = SparkContext(conf=conf)
 
 user_artist_data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/bobby/book/")
 
-tfidf=loadPickle('/home/hadoop/chen.cheng/moa/book_tfidf.pkl')
+#tfidf=loadPickle('/home/hadoop/chen.cheng/moa/book_tfidf.pkl')
 #b = sc.broadcast(tfidf)
 
 ratings = user_artist_data.map(lambda x: json.loads(x))\
@@ -21,8 +21,8 @@ ratings = user_artist_data.map(lambda x: json.loads(x))\
         .map(lambda x: Rating(int(x[0]), int(x[1]), 1))
 ratings.cache()
 
-rank = 5
-numIterations = 30
+rank = 20
+numIterations = 50
 model = ALS.trainImplicit(ratings, rank, numIterations, alpha=0.01)
 
 model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_book")
