@@ -25,4 +25,4 @@ rank = 10
 numIterations = 20
 model = ALS.trainImplicit(ratings, rank, numIterations ,alpha=10)
 
-model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_book_alpha=1")
+model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_book_alpha=10")
