@@ -27,5 +27,3 @@ with open('/home/hadoop/chen.cheng/Chronos/momoid', 'w') as f:
 
 out_male.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/male/2016030618/")
 out_female.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016030618/")
-
-sc.stop()
