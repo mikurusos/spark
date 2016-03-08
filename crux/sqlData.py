@@ -16,4 +16,4 @@ out = data.map(lambda x:json.loads(x)).filter(lambda x: x[0][0] and x[0][1] and 
 schema = sqlContext.createDataFrame(out)
 schema.registerTempTable("people")
 
-schema.save("hdfs://antispam/user/hadoop/output/chencheng/crux/data/dataFrame/%s/"%(sys.argv[1]))
+schema.write.save("hdfs://antispam/user/hadoop/output/chencheng/crux/data/dataFrame/%s/"%(sys.argv[1]))
