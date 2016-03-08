@@ -12,7 +12,7 @@ sc = SparkContext(conf=conf)
 user_artist_data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/male/2016030618/")
 
 ratings = user_artist_data.map(lambda x: json.loads(x))\
-        .map(lambda x: Rating(x[0][0], x[0][1], float(x[1])))
+        .map(lambda x: Rating(int(x[0][0]), int(x[0][1]), float(x[1])))
 ratings.cache()
 
 rank = 10
