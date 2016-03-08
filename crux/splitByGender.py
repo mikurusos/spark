@@ -12,7 +12,7 @@ gender = loadPickle("/home/hadoop/chen.cheng/moa/gender3.pkl")
 b = sc.broadcast(gender)
 data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/2016030218-24/")
 
-out = data.map(lambda x : json.loads(x)).filter(lambda x: int(x[0][0]) in gender and gender[int(x[0][0])] == "M")\
+out = data.map(lambda x : json.loads(x)).filter(lambda x: int(x[0][0]) in b.value and b.value[int(x[0][0])] == "M")\
         .map(lambda x: json.dumps(x))
 
 '''
