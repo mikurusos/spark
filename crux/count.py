@@ -14,7 +14,8 @@ from config import sc
 
 data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/rawData/2016030618-24/")
 
-out = data.map(lambda x:json.loads(x)).flatMap(lambda x:zip(x[0], [0,0]))\
+out = data.map(lambda x:json.loads(x)).flatMap(lambda x:x[0])\
+        .map(lambda x:(x,1))\
         .reduceByKey(lambda x,y:x).map(lambda x:x[0]).collect()
 
 '''
