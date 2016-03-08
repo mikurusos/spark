@@ -18,6 +18,6 @@ ratings.cache()
 
 rank = 10
 numIterations = 20
-model = ALS.trainImplicit(ratings, rank, numIterations ,alpha=0.1)
+model = ALS.train(ratings, rank, numIterations)
 
 model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female")
