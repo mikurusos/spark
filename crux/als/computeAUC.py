@@ -1,5 +1,4 @@
 from __init__ import *
-from ..config import sc
 
 totalCount=sc.accumulator(0)
 invalidCount=sc.accumulator(0)
