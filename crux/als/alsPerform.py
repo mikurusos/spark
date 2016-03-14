@@ -36,4 +36,4 @@ com= schema.map(lambda x: (model.predict(x.sender, x.receivor), x.like)).map(lam
 invalid= com.filter(lambda x: getInvalid(x))
 
 with open('/home/hadoop/chen.cheng/Chronos/AUC', 'w') as f:
-    f.write("%d\t%d\n" %( totalCount,  invalidCount ) )
+    f.write("%d\t%d\n" %( totalCount.value,  invalidCount.value ) )
