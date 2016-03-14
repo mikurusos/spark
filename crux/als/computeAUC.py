@@ -19,7 +19,7 @@ def getInvalid(x):
 data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/results/2016030618/")
 
 data.map(lambda x:json.loads(x)).map(lambda x:(int(x[1][0]), x[1][1])).map(getThreshold)\
-    .filter(getInvalid)
+    .filter(getInvalid).collect()
 
 with open('/home/hadoop/chen.cheng/Chronos/AUC', 'w') as f:
     f.write("%d\t%d\n" %( totalCount.value, invalidCount.value ) )
