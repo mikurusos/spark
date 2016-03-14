@@ -33,7 +33,7 @@ rawData.cache()
 #predict the results
 prediction = model.predictAll(rawData.map(lambda x:x[0])).map(lambda x:((x.user, x.product), x.rating))
 
-# combining with the real
+# combining with the real results
 combins = rawData.join(prediction).map(lambda x: json.dumps(x))
 
 
