@@ -6,7 +6,7 @@ invalidCount=sc.accumulator(0)
 def getThreshold(x):
     global totalCount
     totalCount+=1
-    return int(x[0]), 1 if(x>0.6) else 0
+    return int(x[0]), 1 if(x>0.7) else 0
 
 def getInvalid(x):
     global invalidCount
