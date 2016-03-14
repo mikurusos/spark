@@ -32,7 +32,9 @@ model = MatrixFactorizationModel.load(sc,"hdfs://antispam/user/hadoop/output/che
 schema = sqlContext.read.load("hdfs://antispam/user/hadoop/output/chencheng/crux/data/dataFrame/2016030618")
 
 
-com= schema.map(lambda x: (model.predict(x.sender, x.receivor), x.like)).map(lambda x: (getThreshold(x[0]), x[1]))
+prediction = model.predictAll(schema.map(lambda x:(x.sender, x.receivor)))
+predictionAndLabels = schema.map(lambda x: x.like).zip(prediction)
+com= predictionAndLabels.map(lambda x: (getThreshold(x[0]), x[1]))
 invalid= com.filter(lambda x: getInvalid(x))
 
 with open('/home/hadoop/chen.cheng/Chronos/AUC', 'w') as f:
