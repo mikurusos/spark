@@ -3,7 +3,7 @@ from __init__ import *
 totalCount=sc.accumulator(0)
 invalidCount=sc.accumulator(0)
 
-data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/rawData/2016030318-24/")
+data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/rawData/2016030918-24/")
 
 model = MatrixFactorizationModel.load(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_2-7")
 
@@ -17,5 +17,5 @@ prediction = model.predictAll(data2predict.map(lambda x:x[0])).map(lambda x:((x.
 # combining with the real results
 combins = data2predict.join(prediction).map(lambda x: json.dumps(x))
 
-combins.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/results/2016030318")
+combins.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/results/2016030918")
 sc.stop()
