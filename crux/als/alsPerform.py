@@ -6,13 +6,8 @@ from pyspark import SQLContext, SparkContext, SparkConf
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-import os
-curPath = os.path.abspath(os.path.dirname(__file__))
-print curPath
-rootPath = os.path.split(curPath)[0]
-sys.path.append("/home/hadoop/chen.cheng/spark")
-
-from crux.config import sc
+conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-spark-001.yz.momo.com:8081,anti-spam-spark-002.yz.momo.com:8081")
+sc = SparkContext(conf=conf)
 
 from pyspark.sql import SQLContext, Row
 sqlContext = SQLContext(sc)
