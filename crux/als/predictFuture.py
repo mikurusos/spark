@@ -3,7 +3,7 @@ from __init__ import *
 totalCount=sc.accumulator(0)
 invalidCount=sc.accumulator(0)
 
-data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/results/2016030718/")
+data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/rawData/2016030718-24/")
 
 model = MatrixFactorizationModel.load(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_2-7")
 
