@@ -29,12 +29,14 @@ def getInvalid(x):
         return 0
 
 model = MatrixFactorizationModel.load(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_2-7")
+
+# load the dataframe
 schema = sqlContext.read.load("hdfs://antispam/user/hadoop/output/chencheng/crux/data/dataFrame/2016030618")
 
-
-prediction = model.predictAll(schema.map(lambda x:(x.sender, x.receivor)))
+#predict the results
+prediction = model.predictAll(schema.map(lambda x:(x.sender, x.receivor))).map(lambda x:x.rating)
 predictionAndLabels = schema.map(lambda x: x.like).zip(prediction)
-com= predictionAndLabels.map(lambda x: (getThreshold(x[0]), x[1]))
+com= predictionAndLabels.map(lambda x: (getThreshold(x[1]), x[0]))
 invalid= com.filter(lambda x: getInvalid(x))
 
 with open('/home/hadoop/chen.cheng/Chronos/AUC', 'w') as f:
