@@ -6,5 +6,9 @@ from pyspark.sql import SQLContext, Row
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-spark-001.yz.momo.com:8081,anti-spam-spark-002.yz.momo.com:8081")
+conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-spark-001.yz.momo.com:8081,anti-spam-spark-002.yz.momo.com:8081")\
+    .set("spark.serializer","org.apache.spark.serializer.KryoSerializer")\
+    .set("spark.kryoserializer.buffer.mb", "1024")
 sc = SparkContext(conf=conf)
+
+
