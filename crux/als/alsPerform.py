@@ -6,12 +6,13 @@ from pyspark import SQLContext, SparkContext, SparkConf
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-from crux.config import sc
 import os
 curPath = os.path.abspath(os.path.dirname(__file__))
 print curPath
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
+
+from crux.config import sc
 
 from pyspark.sql import SQLContext, Row
 sqlContext = SQLContext(sc)
