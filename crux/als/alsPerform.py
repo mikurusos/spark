@@ -31,17 +31,16 @@ def getInvalid(x):
 model = MatrixFactorizationModel.load(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_2-7")
 
 # load the dataframe
-data = sc.textFile("hdfs://antispam/user/hadoop/output/wang.yuqi/Venus/like_person/2016030618-24/")
+data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/rawData/2016030618-24/")
 
-rawData=data.map(lambda x:json.loads(x)).filter(lambda x: x[0][0] and x[0][1] and x[1])
+rawData=data.map(lambda x:json.loads(x)).map(lambda x:((int(x[0][0]), int(x[0][1])),x[1])).filter(lambda x: x[0][0] and x[0][1] and x[1])
 rawData.cache()
 
 #predict the results
 prediction = model.predictAll(rawData.map(lambda x:x[0])).map(lambda x:((x.user, x.product), x.rating))
 
 # combining with the real
-combins = rawData.join(prediction)\
-    .map(lambda x: json.dumps(x))
+combins = rawData.join(prediction).map(lambda x: json.dumps(x))
 
 
 combins.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/results/2016030618")
