@@ -34,7 +34,7 @@ model = MatrixFactorizationModel.load(sc,"hdfs://antispam/user/hadoop/output/che
 schema = sqlContext.read.load("hdfs://antispam/user/hadoop/output/chencheng/crux/data/dataFrame/2016030618")
 
 #predict the results
-prediction = model.predictAll(schema.map(lambda x:(x.sender, x.receivor))).map(lambda x:((x.sender, x.receivor), x.rating))
+prediction = model.predictAll(schema.map(lambda x:(x.sender, x.receivor))).map(lambda x:((x.user, x.product), x.rating))
 
 # combining with the real
 combins = schema.map(lambda x:((x.sender, x.receivor), x.like)).join(prediction)\
