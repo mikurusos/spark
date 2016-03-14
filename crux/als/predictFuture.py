@@ -1,5 +1,4 @@
 from __init__ import *
-from computeAUC import *
 
 totalCount=sc.accumulator(0)
 invalidCount=sc.accumulator(0)
