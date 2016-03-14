@@ -37,7 +37,7 @@ schema = sqlContext.read.load("hdfs://antispam/user/hadoop/output/chencheng/crux
 prediction = model.predictAll(schema.map(lambda x:(x.sender, x.receivor))).map(lambda x:((x.sender, x.receivor), x.rating))
 
 # combining with the real
-combins = schema.map(lambda x:((x.sender, x.receivor), x.rating)).join(prediction)
+combins = schema.map(lambda x:((x.sender, x.receivor), x.rating)).join(prediction).map(lambda x: json.dumps(x))
 
 
 combins.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/results/2016030618")
