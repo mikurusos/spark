@@ -33,7 +33,7 @@ model = MatrixFactorizationModel.load(sc,"hdfs://antispam/user/hadoop/output/che
 # load the dataframe
 data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/rawData/2016030618-24/")
 
-rawData=data.map(lambda x:json.loads(x)).map(lambda x:((int(x[0][0]), int(x[0][1])),x[1])).filter(lambda x: x[0][0] and x[0][1] and x[1])
+rawData=data.map(lambda x:json.loads(x)).filter(lambda x: x[0][0] and x[0][1] and x[1]).map(lambda x:((int(x[0][0]), int(x[0][1])),x[1]))
 rawData.cache()
 
 #predict the results
