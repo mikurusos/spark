@@ -7,6 +7,11 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 from crux.config import sc
+import os
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+sys.path.append(rootPath)
+
 from pyspark.sql import SQLContext, Row
 sqlContext = SQLContext(sc)
 

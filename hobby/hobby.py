@@ -3,13 +3,13 @@ import sys
 import json
 import math
 from operator import add
-from pyspark import SQLContext, SparkContext, SparkConf
+#from pyspark import SQLContext, SparkContext, SparkConf
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
 keyword='book'
-
+'''
 conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-spark-001.yz.momo.com:8081,anti-spam-spark-002.yz.momo.com:8081")
 sc = SparkContext(conf=conf)
 
@@ -24,3 +24,4 @@ output = data.map(lambda x: x.split('\t') ) \
 output.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/bobby/%s" % (keyword))
 
 sc.stop()
+'''
