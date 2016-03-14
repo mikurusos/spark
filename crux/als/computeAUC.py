@@ -6,7 +6,7 @@ invalidCount=sc.accumulator(0)
 def getThreshold(x):
     global totalCount
     totalCount+=1
-    return 1 if(x>0.6) else 0
+    return int(x[0]), 1 if(x>0.6) else 0
 
 def getInvalid(x):
     global invalidCount
@@ -18,8 +18,8 @@ def getInvalid(x):
 
 data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/results/2016030618/")
 
-data.map(lambda x:json.loads(x)).map(lambda x:(int(x[1][0]), getThreshold(x[1][1]))) \
-    .filter(lambda x:getInvalid(x))
+data.map(lambda x:json.loads(x)).map(getThreshold)\
+    .filter(getInvalid)
 
 with open('/home/hadoop/chen.cheng/Chronos/AUC', 'w') as f:
     f.write("%d\t%d\n" %( totalCount.value, invalidCount.value ) )
