@@ -6,7 +6,7 @@ from pyspark import SQLContext, SparkContext, SparkConf
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-from config import sc
+from crux.als.config import sc
 from pyspark.sql import SQLContext, Row
 sqlContext = SQLContext(sc)
 
