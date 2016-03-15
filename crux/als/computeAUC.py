@@ -29,7 +29,7 @@ def getInvalid(x):
         else:
             return 0
 
-data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/results/2016030718/")
+data = sc.textFile("%s/results/male/2016030818/" % (HDFS_OUTPUT_PATH))
 
 data.map(lambda x:json.loads(x)).map(lambda x:(int(x[1][0]), x[1][1])).map(getThreshold)\
     .filter(getInvalid).count()

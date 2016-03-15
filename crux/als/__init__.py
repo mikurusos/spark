@@ -15,6 +15,11 @@ conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-s
     .set("spark.kryoserializer.buffer.mb", "1024")
 sc = SparkContext(conf=conf)
 
+HDFS_HOME_PATH="hdfs://antispam/user/hadoop/output/chencheng"
+
+HDFS_OUTPUT_PATH="hdfs://antispam/user/hadoop/output/chencheng/crux"
+
+HDFS_OUTPUT_RESULTS_PATH="hdfs://antispam/user/hadoop/output/chencheng/crux"
 
 
 #.set("spark.shuffle.manager","hash")\
