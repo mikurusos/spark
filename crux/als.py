@@ -19,7 +19,7 @@ ratings = user_artist_data.map(lambda x: json.loads(x))\
         .map(lambda x: Rating(int(x[0][0]), int(x[0][1]), float(x[1])))
 ratings.cache()
 
-rank = 25
+rank = 30
 numIterations = 20
 model = ALS.train(ratings, rank, numIterations)
 
