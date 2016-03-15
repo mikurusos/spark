@@ -7,7 +7,7 @@ data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/rawDa
 
 model = MatrixFactorizationModel.load(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_2-7")
 
-data2predict=data.map(lambda x:json.loads(x)).filter(lambda x: x[0][0] and x[0][1] and x[1])\
+data2predict=data.map(lambda x:json.loads(x)).filter(lambda x: x[0][0] and x[0][1])\
     .map(lambda x:((int(x[0][0]), int(x[0][1])),x[1]))
 data2predict.cache()
 
