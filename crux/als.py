@@ -9,7 +9,10 @@ sys.setdefaultencoding('utf-8')
 conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-spark-001.yz.momo.com:8081,anti-spam-spark-002.yz.momo.com:8081")
 sc = SparkContext(conf=conf)
 
-user_artist_data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016030[6-9]18/")
+user_artist_data1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016030[7-9]18/")
+user_artist_data2 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031018/")
+
+user_artist_data= user_artist_data1.union(user_artist_data2)
 
 ratings = user_artist_data.map(lambda x: json.loads(x))\
         .filter(lambda x: x[0][0] and x[0][1])\
