@@ -5,7 +5,7 @@ invalidCount=sc.accumulator(0)
 
 data = sc.textFile("%s/data/female/2016030918"  %(HDFS_OUTPUT_PATH) )
 
-model = MatrixFactorizationModel.load(sc,"%s/femodel/als_male_0305-8"  %(HDFS_HOME_PATH))
+model = MatrixFactorizationModel.load(sc,"%s/model/als_female_0305-8"  %(HDFS_HOME_PATH))
 
 data2predict=data.map(lambda x:json.loads(x)).filter(lambda x: x[0][0] and x[0][1])\
     .map(lambda x:((int(x[0][0]), int(x[0][1])),x[1]))
