@@ -30,10 +30,10 @@ def getInvalid(x):
             return 0
 
 
-data = sc.textFile("%s/results/female/2016031118/" % (HDFS_OUTPUT_PATH))
+data = sc.textFile("%s/results/female/2016031218/" % (HDFS_OUTPUT_PATH))
 
 data.map(lambda x:json.loads(x)).map(lambda x:(int(x[1][0]), x[1][1])).map(getThreshold)\
     .filter(getInvalid).count()
 
-with open('/home/hadoop/chen.cheng/Chronos/AUC_7-10_11', 'w') as f:
+with open('/home/hadoop/chen.cheng/Chronos/AUC_8-11_12', 'w') as f:
     f.write("%d\t%d\t%d\t%d\n" %( totalTrue.value, totalFalse.value, invalidTrue.value, invalidFalse.value ) )
