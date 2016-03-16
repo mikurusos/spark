@@ -30,7 +30,7 @@ def getInvalid(x):
             return 0
 
 
-data = sc.textFile("%s/results/female/2016031318_/" % (HDFS_OUTPUT_PATH))
+data = sc.textFile("%s/results/female/2016031518_40_/" % (HDFS_OUTPUT_PATH))
 
 data.map(lambda x:json.loads(x)).map(lambda x:(int(x[1][0]), x[1][1])).map(getThreshold)\
     .filter(getInvalid).count()
