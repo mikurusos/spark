@@ -16,7 +16,7 @@ prediction = model.predictAll(data2predict.map(lambda x:x[0])).map(lambda x:((x.
 
 #combining with the real results
 combins = data2predict.join(prediction).map(lambda x:(x,1))\
-        .reduceByKey(lambda x,y:x[0]).map(lambda x: json.dumps(x))
+        .reduceByKey(lambda x,y:x).map(lambda x: json.dumps(x[0]))
 
 combins.saveAsTextFile("%s/results/parameters/female/2016031518_003"  %(HDFS_OUTPUT_PATH) )
 sc.stop()
