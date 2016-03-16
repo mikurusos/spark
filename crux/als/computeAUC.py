@@ -7,7 +7,7 @@ invalidFalse=sc.accumulator(0)
 
 def getThreshold(x):
     global totalTrue, totalFalse
-    res = x[0], 1 if(x[1]>0.8) else 0
+    res = x[0], 1 if(x[1]>0.1) else 0
     if(res[1]):
         totalTrue+=1
     else:
