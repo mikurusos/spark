@@ -19,18 +19,18 @@ def myCount(x):
 
 result={}
 
-data = sc.textFile("%s/results/parameters/female/2016031518_006" % (HDFS_OUTPUT_PATH))
+data = sc.textFile("%s/results/parameters/female/2016031518_003" % (HDFS_OUTPUT_PATH))
 
 tmp=data.map(lambda x:json.loads(x)).map(lambda x:(int(x[1][0]), x[1][1]))
 tmp.cache()
 
 for i in np.arange(0,1,0.1):
-    tmp.filter(lambda x:x[1]<i).map(myCount).count()
-    result[i] = (like.value - tmp_like, dislike.value- tmp_dislike)
+    tmp.filter(lambda x:i-0.1<=x[1]<i).map(myCount).count()
+    result["%f-%f"%(i-0.1, i  )] = (like.value - tmp_like, dislike.value- tmp_dislike)
     tmp_like=like.value
     tmp_dislike = dislike.value
 
 
-with open('/home/hadoop/chen.cheng/Chronos/parameters/AUC_purity_dislike_006', 'w') as f:
+with open('/home/hadoop/chen.cheng/Chronos/parameters/AUC_purity_dislike_003', 'w') as f:
     for item in result:
-        f.write("%f\t%d\t%d\n" %(item, result[item][0], result[item][1] ) )
+        f.write("%d\t%d\t%d\n" %(item, result[item][0], result[item][1] ) )
