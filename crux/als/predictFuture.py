@@ -10,7 +10,7 @@ data2predict.cache()
 
 #female1=data2predict.map(lambda x:(x[0][0],1)).reduceByKey(lambda x,y:x).count()
 
-female1 = data2predict.count()
+female1 = data2predict.map(lambda x:(x,1)).reduceByKey(lambda x,y:x).count()
 
 #predict the results
 prediction = model.predictAll(data2predict.map(lambda x:x[0]))
