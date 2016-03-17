@@ -25,12 +25,12 @@ tmp=data.map(lambda x:json.loads(x)).map(lambda x:(int(x[1][0]), x[1][1]))
 tmp.cache()
 
 for i in np.arange(0,1,0.1):
-    tmp.filter(lambda x:x[1]>i).map(myCount).count()
+    tmp.filter(lambda x:x[1]<i).map(myCount).count()
     result[i] = (like.value - tmp_like, dislike.value- tmp_dislike)
     tmp_like=like.value
     tmp_dislike = dislike.value
 
 
-with open('/home/hadoop/chen.cheng/Chronos/parameters/AUC_purity', 'w') as f:
+with open('/home/hadoop/chen.cheng/Chronos/parameters/AUC_purity_dislike', 'w') as f:
     for item in result:
         f.write("%f\t%d\t%d\n" %(item, result[item][0], result[item][1] ) )
