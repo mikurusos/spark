@@ -8,7 +8,7 @@ dislike=sc.accumulator(0)
 
 def myCount(x):
     global like, dislike
-    if(x):
+    if(x[0]==1):
         like+=1
     else:
         dislike+=1
