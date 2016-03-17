@@ -9,7 +9,7 @@ sys.setdefaultencoding('utf-8')
 conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-spark-001.yz.momo.com:8081,anti-spam-spark-002.yz.momo.com:8081")
 sc = SparkContext(conf=conf)
 
-user_artist_data1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016030918/")
+user_artist_data1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016030[8-9]18/")
 user_artist_data2 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031[0-3]18/")
 
 user_artist_data= user_artist_data1.union(user_artist_data2)
@@ -23,4 +23,4 @@ rank = 30
 numIterations = 20
 model = ALS.train(ratings, rank, numIterations,lambda_=0.03)
 
-model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_parameters/30/als_female_0309-13_003")
+model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_parameters/30/als_female_0308-13_003")
