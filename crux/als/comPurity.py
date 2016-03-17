@@ -2,7 +2,7 @@
 from __init__ import *
 import numpy as np
 
-threshold = float(sys.argv[1])
+#threshold = float(sys.argv[1])
 
 tmp_like=0
 tmp_dislike=0
