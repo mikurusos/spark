@@ -1,8 +1,5 @@
 from __init__ import *
 
-totalCount=sc.accumulator(0)
-invalidCount=sc.accumulator(0)
-
 data = sc.textFile("%s/data/female/2016031518"  %(HDFS_OUTPUT_PATH) )
 
 model = MatrixFactorizationModel.load(sc,"%s/model/als_female_parameters/als_female_0311-14_30_004"  %(HDFS_HOME_PATH))
