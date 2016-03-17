@@ -8,10 +8,12 @@ data2predict=data.map(lambda x:json.loads(x)).filter(lambda x: x[0][0] and x[0][
     .map(lambda x:((int(x[0][0]), int(x[0][1])),x[1]))
 data2predict.cache()
 
+female1=data2predict.mao(lambda x:(x[0][0],1)).reduceByKey(lambda x,y:x).count()
+
 #predict the results
 prediction = model.predictAll(data2predict.map(lambda x:x[0])).map(lambda x:(x.user, 1))
 
-female = prediction.reduceByKey(lambda x,y:x).count()
+female2 = prediction.reduceByKey(lambda x,y:x).count()
 
 #combining with the real results
 #combins = data2predict.join(prediction).map(lambda x:(x,1))\
@@ -20,7 +22,7 @@ female = prediction.reduceByKey(lambda x,y:x).count()
 #combins.saveAsTextFile("%s/results/parameters/female/25/2016031518_003_"  %(HDFS_OUTPUT_PATH) )
 
 with open('/home/hadoop/chen.cheng/Chronos/female_2016031518_', 'w') as f:
-    f.write("%d" %(female))
+    f.write("%d\t%d" %(female1, female2))
 
 
 sc.stop()
