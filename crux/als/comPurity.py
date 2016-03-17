@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __init__ import *
 
-threshold = int(sys.argv[1])
+threshold = float(sys.argv[1])
 
 like=sc.accumulator(0)
 dislike=sc.accumulator(0)
