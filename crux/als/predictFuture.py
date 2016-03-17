@@ -8,12 +8,16 @@ data2predict=data.map(lambda x:json.loads(x)).filter(lambda x: x[0][0] and x[0][
     .map(lambda x:((int(x[0][0]), int(x[0][1])),x[1]))
 data2predict.cache()
 
-female1=data2predict.map(lambda x:(x[0][0],1)).reduceByKey(lambda x,y:x).count()
+#female1=data2predict.map(lambda x:(x[0][0],1)).reduceByKey(lambda x,y:x).count()
+
+female1 = data2predict.count()
 
 #predict the results
-prediction = model.predictAll(data2predict.map(lambda x:x[0])).map(lambda x:(x.user, 1))
+prediction = model.predictAll(data2predict.map(lambda x:x[0]))
 
-female2 = prediction.reduceByKey(lambda x,y:x).count()
+#female2 = prediction.reduceByKey(lambda x,y:x).count()
+
+female2= prediction.count()
 
 #combining with the real results
 #combins = data2predict.join(prediction).map(lambda x:(x,1))\
