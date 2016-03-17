@@ -8,7 +8,7 @@ data2predict=data.map(lambda x:json.loads(x)).filter(lambda x: x[0][0] and x[0][
     .map(lambda x:((int(x[0][0]), int(x[0][1])),x[1]))
 data2predict.cache()
 
-female1=data2predict.mao(lambda x:(x[0][0],1)).reduceByKey(lambda x,y:x).count()
+female1=data2predict.map(lambda x:(x[0][0],1)).reduceByKey(lambda x,y:x).count()
 
 #predict the results
 prediction = model.predictAll(data2predict.map(lambda x:x[0])).map(lambda x:(x.user, 1))
