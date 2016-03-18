@@ -12,8 +12,7 @@ data2predict.cache()
 prediction = util.predictData(model,data2predict)
 
 #combining with the real results
-combins = data2predict.join(prediction).map(lambda x:(x,1))\
-        .reduceByKey(lambda x,y:x).map(lambda x: json.dumps(x[0]))
+combins = data2predict.join(prediction).distinct().map(lambda x: json.dumps(x))
 
 combins.saveAsTextFile("%s/data/testSample/male/20160315-1618_results_als_male_0312-14_30_003"  %(HDFS_OUTPUT_PATH) )
 
