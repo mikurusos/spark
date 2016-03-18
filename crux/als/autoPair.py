@@ -12,7 +12,7 @@ femaleData= female_results.map(lambda x:json.loads(x))\
     .map(lambda x: ((x[0][1],x[0][0]),(1, (0,x[1][1])) ))
 
 maleData= male_results.map(lambda x:json.loads(x))\
-    .map(lambda x: (x[0],(1, (x[1][1],0)) ))
+    .map(lambda x: ((x[0][0],x[0][1]),(1, (x[1][1],0)) ))
 
 pair = maleData.union(femaleData).reduceByKey(pairAdd).map(lambda x:json.loads(x))
 
