@@ -13,9 +13,12 @@ date = sys.argv[1]
 gender = loadPickle("/home/hadoop/chen.cheng/moa/gender16.pkl")
 b = sc.broadcast(gender)
 data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/rawData/%s-24/" % (date))
+data.cache()
 
 out_male = data.map(lambda x : json.loads(x)).filter(lambda x: x[0][0] and x[0][1])\
     .filter(lambda x: b.value[int(x[0][0])] == "M").map(lambda x: json.dumps(x))
+
+out_male.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/male/%s/"% (date))
 
 out_female = data.map(lambda x : json.loads(x)).filter(lambda x: x[0][0] and x[0][1])\
     .filter(lambda x: b.value[int(x[0][0])] == "F")\
@@ -27,5 +30,4 @@ with open('/home/hadoop/chen.cheng/Chronos/momoid', 'w') as f:
         f.write("%s\n" %(item ) )
 '''
 
-out_male.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/male/%s/"% (date))
 out_female.saveAsTextFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/%s/"% (date))
