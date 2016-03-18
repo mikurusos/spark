@@ -14,6 +14,6 @@ prediction = util.predictData(model,data2predict)
 #combining with the real results
 combins = data2predict.join(prediction).distinct().map(lambda x: json.dumps(x))
 
-combins.saveAsTextFile("%s/data/testSample/male/2016031418_results_als_male_0312-14_30_003"  %(HDFS_OUTPUT_PATH) )
+combins.saveAsTextFile("%s/results/male/2016031418"  %(HDFS_OUTPUT_PATH) )
 
 sc.stop()
