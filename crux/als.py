@@ -10,7 +10,7 @@ conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-s
 sc = SparkContext(conf=conf)
 
 #user_artist_data1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016030[8-9]18/")
-user_artist_data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/male/2016031[3-5]18/")
+user_artist_data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/male/2016031[1-4]18/")
 
 #user_artist_data= user_artist_data1.union(user_artist_data2)
 
@@ -20,7 +20,7 @@ ratings = user_artist_data.map(lambda x: json.loads(x))\
 ratings.cache()
 
 rank = 30
-numIterations = 20
+numIterations = 30
 model = ALS.train(ratings, rank, numIterations,lambda_=0.03)
 
-model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_male_parameters/30/als_male_0313-15_003")
+model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_parameters/30/als_female_0311-14_003_30")
