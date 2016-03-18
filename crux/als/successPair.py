@@ -1,7 +1,7 @@
 from __init__ import *
 
 def pairAdd(x,y):
-    return x[0]+y[0], x[1]+y[1]
+    return (x[0]+y[0], x[1]+y[1])
 
 male = sc.textFile("%s/data/male/2016031618"  %(HDFS_OUTPUT_PATH) ).map(lambda x:json.loads(x))
 female = sc.textFile("%s/data/female/2016031618"  %(HDFS_OUTPUT_PATH) ).map(lambda x:json.loads(x))
