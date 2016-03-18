@@ -15,3 +15,7 @@ maleData= male_results.map(lambda x:json.loads(x))\
     .map(lambda x: (x[0],(1, (x[1][1],0)) ))
 
 pair = maleData.union(femaleData).reduceByKey(pairAdd).map(lambda x:json.loads(x))
+
+pair.saveAsTextFile("%s/data/testSample/pair/20160315-1618_results_als_female_0311-14_30_003"  %(HDFS_OUTPUT_PATH) )
+
+sc.stop()
