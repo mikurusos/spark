@@ -15,6 +15,6 @@ prediction = util.predictData(model,data2predict)
 combins = data2predict.join(prediction).map(lambda x:(x,1))\
         .reduceByKey(lambda x,y:x).map(lambda x: json.dumps(x[0]))
 
-combins.saveAsTextFile("%s/data/testSample/female/20160315-1618_results_als_female_0311-14_30_003"  %(HDFS_OUTPUT_PATH) )
+combins.saveAsTextFile("%s/data/testSample/male/20160315-1618_results_als_male_0312-14_30_003"  %(HDFS_OUTPUT_PATH) )
 
 sc.stop()
