@@ -1,7 +1,7 @@
 import util
 from __init__ import *
 
-data = sc.textFile("%s/data/testSample/male/2016031518"  %(HDFS_OUTPUT_PATH) )
+data = sc.textFile("%s/data/male/2016031518"  %(HDFS_OUTPUT_PATH) )
 
 model = MatrixFactorizationModel.load(sc,"%s/model/als_male_parameters/30/als_male_0312-14_003"  %(HDFS_HOME_PATH))
 
