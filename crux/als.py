@@ -10,7 +10,7 @@ conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-s
 sc = SparkContext(conf=conf)
 
 #user_artist_data1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016030[8-9]18/")
-user_artist_data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/male/2016031[1-4]18/")
+user_artist_data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031[1-4]18/")
 
 #user_artist_data= user_artist_data1.union(user_artist_data2)
 
