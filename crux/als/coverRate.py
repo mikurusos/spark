@@ -1,7 +1,7 @@
 from __init__ import *
 from operator import add
 
-rawData=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031[0-6]18")
+rawData=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031618")
 
 rawData = rawData.map(lambda x:json.loads(x))\
     .map(lambda x:(int(x[0][0]), int(x[0][1]))).cache()
