@@ -12,7 +12,7 @@ from config import sc
 
 #b = sc.broadcast(gender)
 
-data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/rawData/2016032018-24/")
+data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/rawData/2016031718-24/")
 
 out = data.map(lambda x:json.loads(x)).flatMap(lambda x:x[0])\
         .map(lambda x:(x,1))\
@@ -23,6 +23,6 @@ male = tmp.filter(lambda x: x[0][0].isdigit()).filter(lambda x: int(x[0][0]) in 
 female = tmp.filter(lambda x: x[0][0].isdigit()).filter(lambda x: int(x[0][0]) in gender and gender[int(x[0][0])]=='F').count()
 '''
 
-with open('/home/hadoop/chen.cheng/moa/0320_momoid', 'w') as f:
+with open('/home/hadoop/chen.cheng/moa/0317_momoid', 'w') as f:
     for item in out:
         f.write("%s\n" %( item  ) )
