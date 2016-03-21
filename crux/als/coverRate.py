@@ -1,7 +1,7 @@
 from __init__ import *
 from operator import add
 
-rawData=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031618")
+rawData=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031[3-9]18")
 
 rawData = rawData.map(lambda x:json.loads(x))\
     .map(lambda x:(int(x[0][0]), int(x[0][1]))).cache()
@@ -9,14 +9,14 @@ rawData = rawData.map(lambda x:json.loads(x))\
 rawMale = rawData.map(lambda x:(x[0],1)).distinct()
 rawFemale = rawData.map(lambda x:(x[1],1)).distinct()
 
-data=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031718")
+data=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016032018")
 
 data = data.map(lambda x:json.loads(x))\
     .map(lambda x:(int(x[0][0]), int(x[0][1]))).cache()
 
-male = rawData.map(lambda x:(x[0],1)).distinct()
+male = data.map(lambda x:(x[0],1)).distinct()
 num1_male=male.count()
-female = rawData.map(lambda x:(x[1],1)).distinct()
+female = data.map(lambda x:(x[1],1)).distinct()
 num1_female=female.count()
 
 num2_male=male.union(rawMale).reduceByKey(add).filter(lambda x:x[1]==2).count()
