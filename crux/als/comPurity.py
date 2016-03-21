@@ -26,13 +26,11 @@ tmp.cache()
 
 for i in np.arange(-0.2,1.5,0.1):
     tmp.filter(lambda x:i-0.1<=x[1]<i).map(myCount).count()
-    result["%f-%f"%(i-0.1, i  )] = (like.value - tmp_like, dislike.value- tmp_dislike)
+    result["%f-%f"%(i-0.1, i)] = (like.value - tmp_like, dislike.value- tmp_dislike)
     tmp_like=like.value
     tmp_dislike = dislike.value
 
 
 with open('/home/hadoop/chen.cheng/Chronos/parameters/AUC_purity_female_dislike_2016032018', 'w') as f:
     for item in result:
-        f.write("%s\t%d\t%d\n" %(item, result[item][0], result[item][1] ) )
-
-#, float(result[item][0])/result[item][1]
+        f.write("%s\t%d\t%d\t%f\n" %(item, result[item][0], result[item][1], float(result[item][0])/result[item][1] ) )
