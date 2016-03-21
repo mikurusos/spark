@@ -1,7 +1,7 @@
 from __init__ import *
 from operator import add
 
-rawData=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031[2-8]18")
+rawData=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/results/female/2016031[2-8]18")
 
 rawData = rawData.map(lambda x:json.loads(x))\
     .map(lambda x:(int(x[0][0]), int(x[0][1]))).cache()
@@ -9,7 +9,7 @@ rawData = rawData.map(lambda x:json.loads(x))\
 rawMale = rawData.map(lambda x:(x[0],1)).distinct()
 rawFemale = rawData.map(lambda x:(x[1],1)).distinct()
 
-data=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031918")
+data=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/results/female/2016031918")
 
 data = data.map(lambda x:json.loads(x))\
     .map(lambda x:(int(x[0][0]), int(x[0][1]))).cache()
