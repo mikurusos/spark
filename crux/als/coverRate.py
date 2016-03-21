@@ -12,8 +12,7 @@ rawFemale = rawData.map(lambda x:(x[1],1)).distinct()
 data=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031918")
 
 data = data.map(lambda x:json.loads(x))\
-    .map(lambda x:(int(x[0][0]), int(x[0][1])))\
-    .map(lambda x:(x,1)).cache()
+    .map(lambda x:(int(x[0][0]), int(x[0][1]))).cache()
 
 male = rawData.map(lambda x:(x[0],1)).distinct()
 num1_male=male.count()
