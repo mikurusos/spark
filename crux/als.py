@@ -23,4 +23,4 @@ rank = 30
 numIterations = 25
 model = ALS.train(ratings, rank, numIterations,lambda_=0.03)
 
-model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_parameters/30/als_female_0316-19_003_30")
+model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_parameters/30/als_female_0316-19_003")
