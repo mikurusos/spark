@@ -16,10 +16,9 @@ data = data.map(lambda x:json.loads(x))\
     .map(lambda x:(x,1)).cache()
 
 male = rawData.map(lambda x:(x[0],1)).distinct()
+num1_male=male.count()
 female = rawData.map(lambda x:(x[1],1)).distinct()
-
-num1_male=male.union(rawMale).reduceByKey(add).filter(lambda x:x[1]==1).count()
-num1_female=female.union(rawFemale).reduceByKey(add).filter(lambda x:x[1]==1).count()
+num1_female=female.count()
 
 num2_male=male.union(rawMale).reduceByKey(add).filter(lambda x:x[1]==2).count()
 num2_female=female.union(rawFemale).reduceByKey(add).filter(lambda x:x[1]==2).count()
