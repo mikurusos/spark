@@ -19,7 +19,7 @@ def myCount(x):
 
 result={}
 
-data = sc.textFile("%s/results/female/2016032018_10-21" % (HDFS_OUTPUT_PATH))
+data = sc.textFile("%s/results/female/2016032018_0310-21" % (HDFS_OUTPUT_PATH))
 
 tmp=data.map(lambda x:json.loads(x)).map(lambda x:(int(x[1][0]), x[1][1]))
 tmp.cache()
