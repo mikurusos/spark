@@ -4,9 +4,9 @@ model = MatrixFactorizationModel.load(sc,"%s/model/als_female_parameters/30/als_
 
 female= model.userFeatures().map(lambda x:(x[0],list(x[1])))
 
-female.saveAsTextFile("%s/data/realdata/0322/chengdu_model_female"  %(HDFS_OUTPUT_PATH) )
+female.saveAsTextFile("%s/data/realdata/0322/chengdu_model_0310-21_003_female"  %(HDFS_OUTPUT_PATH) )
 
 male= model.productFeatures().map(lambda x:(x[0],list(x[1])))
 
-male.saveAsTextFile("%s/data/realdata/0322/chengdu_model_male"  %(HDFS_OUTPUT_PATH) )
+male.saveAsTextFile("%s/data/realdata/0322/chengdu_model_0310-21_003_male"  %(HDFS_OUTPUT_PATH) )
 
