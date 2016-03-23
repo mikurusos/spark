@@ -8,7 +8,7 @@ with open("/home/hadoop/data/chengdu_male0322") as f:
 
 b = sc.broadcast(male)
 
-result = female.flatMap(lambda x: [(x,i) for i in b.value])
+result = female.flatMap(lambda x: [(int(x),i) for i in b.value])
 
 result.saveAsTextFile("%s/data/realdata/chengdu_result0322"  %(HDFS_OUTPUT_PATH) )
 
