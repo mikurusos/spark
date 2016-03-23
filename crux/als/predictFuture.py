@@ -1,7 +1,7 @@
 import util
 from __init__ import *
 
-data = sc.textFile("%s/data/female/2016032018"  %(HDFS_OUTPUT_PATH) )
+data = sc.textFile("%s/data/female/2016032218"  %(HDFS_OUTPUT_PATH) )
 
 model = MatrixFactorizationModel.load(sc,"%s/model/als_female_parameters/30/als_female_0310-21_003"  %(HDFS_HOME_PATH))
 
@@ -14,6 +14,6 @@ prediction = util.predictData(model,data2predict)
 #combining with the real results
 combins = data2predict.join(prediction).distinct().map(lambda x: json.dumps(x))
 
-combins.saveAsTextFile("%s/results/female/2016032018_0310-21"  %(HDFS_OUTPUT_PATH) )
+combins.saveAsTextFile("%s/results/female/2016032218_0310-21"  %(HDFS_OUTPUT_PATH) )
 
 sc.stop()
