@@ -28,4 +28,4 @@ numIterations = 25
 ALS.checkpointInterval = 2
 model = ALS.train(ratings, rank, numIterations,lambda_=0.03)
 
-model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_parameters/30/als_female_0310-22_003_test")
+model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_parameters/30/als_female_0310-22_003")
