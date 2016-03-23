@@ -7,6 +7,7 @@ rawData2=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/fem
 rawData= rawData1.union(rawData2)
 
 rawData = rawData.map(lambda x:json.loads(x))\
+    .filter(lambda x: x[0][0] and x[0][1])\
     .map(lambda x:(int(x[0][0]), int(x[0][1]))).cache()
 
 rawMale = rawData.map(lambda x:(x[0],1)).distinct()
