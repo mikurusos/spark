@@ -10,7 +10,7 @@ from util import loadPickle
 
 date = sys.argv[1]
 
-gender = loadPickle("/home/hadoop/chen.cheng/moa/gender21.pkl")
+gender = loadPickle("/home/hadoop/chen.cheng/moa/gender22.pkl")
 b = sc.broadcast(gender)
 data = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/rawData/%s-24/" % (date))
 data.cache()
