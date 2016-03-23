@@ -15,7 +15,7 @@ conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-s
     .set("spark.serializer","org.apache.spark.serializer.KryoSerializer")\
     .set("spark.kryoserializer.buffer.mb", "1024")
 sc = SparkContext(conf=conf)
-sc.checkpont("hdfs://antispam/user/hadoop/output/chencheng/checkpoint")
+sc.setCheckpointDir("hdfs://antispam/user/hadoop/output/chencheng/checkpoint")
 
 HDFS_HOME_PATH="hdfs://antispam/user/hadoop/output/chencheng"
 
