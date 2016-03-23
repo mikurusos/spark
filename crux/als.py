@@ -22,10 +22,10 @@ ratings = user_artist_data.map(lambda x: json.loads(x))\
 ratings.checkpoint()
 ratings.cache()
 
-rank = 30
-numIterations = 25
+rank = 35
+numIterations = 30
 
 ALS.checkpointInterval = 2
 model = ALS.train(ratings, rank, numIterations,lambda_=0.03)
 
-model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_parameters/30/als_female_0310-21_003")
+model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_parameters/35/als_female_0310-21_003")
