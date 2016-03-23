@@ -11,8 +11,8 @@ sc = SparkContext(conf=conf)
 sc.setCheckpointDir("hdfs://antispam/user/hadoop/output/chencheng/checkpoint")
 
 #user_artist_data1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016030[2-9]18/")
-user_artist_data1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031[0-9]18/")
-user_artist_data2 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016032[0-2]18/")
+user_artist_data1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031[7-9]18/")
+user_artist_data2 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/male/2016032[0-1]18/")
 
 user_artist_data= user_artist_data1.union(user_artist_data2)
 
@@ -28,4 +28,4 @@ numIterations = 25
 ALS.checkpointInterval = 2
 model = ALS.train(ratings, rank, numIterations,lambda_=0.03)
 
-model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_parameters/30/als_female_0310-22_003")
+model.save(sc,"hdfs://antispam/user/hadoop/output/chencheng/model/als_female_parameters/30/als_female_0317-21_003")
