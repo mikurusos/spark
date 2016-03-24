@@ -33,4 +33,5 @@ for i in np.arange(-1,3.0,0.1):
 
 with open('/home/hadoop/chen.cheng/Chronos/parameters/AUC_purity_female_dislike_2016032318_0310-22_35', 'w') as f:
     for item in result:
-        f.write("%s\t%d\t%d\t%f\n" %(item, result[item][0], result[item][1], float(result[item][0])/result[item][1] ) )
+        if(result[item][1]):
+            f.write("%s\t%d\t%d\t%f\n" %(item, result[item][0], result[item][1], float(result[item][0])/result[item][1] ) )
