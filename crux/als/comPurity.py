@@ -24,7 +24,7 @@ data = sc.textFile("%s/results/female/2016032318_0310-22_003_35" % (HDFS_OUTPUT_
 tmp=data.map(lambda x:json.loads(x)).map(lambda x:(int(x[1][0]), x[1][1]))
 tmp.cache()
 
-for i in np.arange(-0.5,1.8,0.1):
+for i in np.arange(-1,3.0,0.1):
     tmp.filter(lambda x:i-0.1<=x[1]<i).map(myCount).count()
     result["%f-%f"%(i-0.1, i)] = (like.value - tmp_like, dislike.value- tmp_dislike)
     tmp_like=like.value

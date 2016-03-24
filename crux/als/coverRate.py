@@ -1,8 +1,8 @@
 from __init__ import *
 from operator import add
 
-rawData1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016030[2-9]18/")
-rawData2=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031[0-9]18")
+rawData1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031[0-9]18/")
+rawData2=sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016032[0-2]18")
 
 rawData= rawData1.union(rawData2)
 
