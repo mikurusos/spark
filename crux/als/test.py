@@ -17,7 +17,7 @@ data=sc.textFile("hdfs://antispam/user/flume/events/api/api_logs/2016/01/01/20/a
 
 
 data=data.map(lambda x: json.loads(x)).filter(lambda x:x["momoid"])\
-    .map(getRawData).map(lambda x: (x[0],  {x[1]:1} ))\
+    .map(getRawData).map(lambda x: (x[0], ( {x[1]:1}, 1) ))\
     .reduceByKey(combineDict).map(lambda x:json.dumps(x))
 
 
