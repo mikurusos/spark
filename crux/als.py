@@ -10,8 +10,8 @@ conf = SparkConf().setAppName("chencheng's task").setMaster("spark://anti-spam-s
 sc = SparkContext(conf=conf)
 sc.setCheckpointDir("hdfs://antispam/user/hadoop/output/chencheng/checkpoint")
 
-user_artist_data1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/male/2016031[0-9]18/")
-user_artist_data2 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/male/2016032[0-3]18/")
+user_artist_data1 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016031[0-9]18/")
+user_artist_data2 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/female/2016032[0-3]18/")
 #user_artist_data2 = sc.textFile("hdfs://antispam/user/hadoop/output/chencheng/crux/data/male/2016032[0-1]18/")
 
 user_artist_data= user_artist_data1.union(user_artist_data2)
