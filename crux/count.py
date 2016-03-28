@@ -18,10 +18,6 @@ out = data.map(lambda x:json.loads(x)).flatMap(lambda x:x[0])\
         .map(lambda x:(x,1))\
         .reduceByKey(lambda x,y:x).map(lambda x:x[0]).collect()
 
-'''
-male = tmp.filter(lambda x: x[0][0].isdigit()).filter(lambda x: int(x[0][0]) in gender and gender[int(x[0][0])]=='M').count()
-female = tmp.filter(lambda x: x[0][0].isdigit()).filter(lambda x: int(x[0][0]) in gender and gender[int(x[0][0])]=='F').count()
-'''
 
 with open('/home/hadoop/chen.cheng/moa/0324_momoid', 'w') as f:
     for item in out:
