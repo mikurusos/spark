@@ -6,5 +6,4 @@ def prepareData2predict(rawData):
 
 
 def predictData(model, data2predict):
-
     return model.predictAll(data2predict.map(lambda x:x[0])).map(lambda x:((x.user, x.product), x.rating))
